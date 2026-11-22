@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Doces na Travessa – Marcia Bizi | Sobremesas de fim de ano</title>
 <meta name="description" content="Pavês e tortas na travessa de 1,5 kg para as suas festas de fim de ano. Serve cerca de 12 pessoas. Entrega combinada pelo WhatsApp.">
+<meta property="og:title" content="Doces na Travessa – Marcia Bizi">
+<meta property="og:description" content="Pavês e tortas na travessa de 1,5 kg, serve cerca de 12 pessoas. Peça pelo WhatsApp.">
+<meta property="og:image" content="https://doces-na-travessa.vercel.app/fotos/limao.jpg">
+<meta property="og:type" content="website">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -228,13 +232,13 @@ const SABORES = [
   {id:"kinder", nome:"Pavê de Kinder Bueno", tag:"Pavê · Chocolates", preco:169.90,
    desc:"Creme de avelã, creme branco e pedaços de Kinder Bueno.", foto:"", cor:["#7A4B2E","#E9D3B0"]},
   {id:"ninho", nome:"Pavê de Ninho com morango", tag:"Pavê · Frutas", preco:149.90,
-   desc:"Creme de leite Ninho e morangos frescos.", foto:"", cor:["#A8322D","#F6E7DC"]},
+   desc:"Creme de leite Ninho e morangos frescos.", foto:"fotos/ninho-morango.jpg", cor:["#A8322D","#F6E7DC"]},
   {id:"uva", nome:"Pavê Bombom de uva", tag:"Pavê · Frutas", preco:149.90,
-   desc:"Creme branco, uvas inteiras e ganache.", foto:"", cor:["#4E3A5A","#D9C7A8"]},
+   desc:"Creme branco, uvas inteiras e ganache.", foto:"fotos/uva.jpg", cor:["#4E3A5A","#D9C7A8"]},
   {id:"limao", nome:"Torta de limão com ganache", tag:"Torta · Frutas", preco:149.90,
-   desc:"Base de massa crocante, creme de limão e ganache.", foto:"", cor:["#7E8F3A","#F3EBC8"]},
+   desc:"Base de massa crocante, creme de limão e ganache.", foto:"fotos/limao.jpg", cor:["#7E8F3A","#F3EBC8"]},
   {id:"maracuja", nome:"Torta de maracujá com chocolate", tag:"Torta · Frutas", preco:149.90,
-   desc:"Base de massa crocante, mousse de maracujá e chocolate.", foto:"", cor:["#D08A1E","#4A2C1E"]},
+   desc:"Base de massa crocante, mousse de maracujá e chocolate.", foto:"fotos/maracuja.jpg", cor:["#D08A1E","#4A2C1E"]},
 ];
 
 const qtd = {};
@@ -272,7 +276,8 @@ grade.addEventListener("click", e => {
 
 // Galeria (repetida para rolar sem fim)
 const trilho = document.getElementById("trilho");
-const cards = SABORES.map(s => `<figure class="foto" style="background-image:${fundo(s)}"><figcaption>${s.nome}</figcaption></figure>`).join("");
+const comFoto = SABORES.filter(s => s.foto);
+const cards = (comFoto.length ? comFoto : SABORES).map(s => `<figure class="foto" style="background-image:${fundo(s)}"><figcaption>${s.nome}</figcaption></figure>`).join("");
 trilho.innerHTML = cards + cards;
 
 function calcular(){
