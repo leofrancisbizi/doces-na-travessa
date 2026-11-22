@@ -80,6 +80,10 @@
   .qtd button{width:36px;height:36px;border-radius:50%;border:0;background:var(--branco);color:var(--choco);font-size:1.25rem;font-weight:700;cursor:pointer;box-shadow:0 1px 2px rgba(59,36,24,.15)}
   .qtd button:hover{background:var(--choco);color:var(--creme)}
   .qtd output{min-width:28px;text-align:center;font-weight:700;font-size:1.05rem}
+  .linha.multi{align-items:flex-start;flex-wrap:wrap;gap:10px}
+  .opcoes{display:flex;flex-direction:column;gap:6px}
+  .qtd.opcao{justify-content:flex-end}
+  .qtd .rot{font-size:.85rem;font-weight:700;padding:0 6px 0 10px;white-space:nowrap}
   .item.ativo{border-color:var(--vermelho);box-shadow:0 0 0 2px var(--vermelho) inset}
   .oferta{margin-top:26px;text-align:center;background:var(--choco);color:var(--creme);border-radius:var(--radius);padding:18px;font-size:1.05rem}
   .oferta b{color:var(--dourado)}
@@ -227,8 +231,8 @@ const DESCONTO = 20;
 
 // Para trocar as fotos: preencha "foto" com o caminho da imagem (ex.: "fotos/limao.jpg").
 const SABORES = [
-  {id:"sonho", nome:"Pavê de Sonho de Valsa", tag:"Pavê · Chocolates", preco:169.90,
-   desc:"Creme de baunilha, ganache e bombons picados por cima.", foto:"", cor:["#5B3A29","#C9A15B"]},
+  {id:"bombom", nome:"Pavê de Bombom", tag:"Pavê · Chocolates", preco:169.90, opcoes:["Sonho de Valsa","Ouro Branco"],
+   desc:"Creme de baunilha, ganache e bombons por cima. Você escolhe o bombom:", foto:"fotos/pave-bombom.jpg", cor:["#5B3A29","#C9A15B"]},
   {id:"kinder", nome:"Pavê de Kinder Bueno", tag:"Pavê · Chocolates", preco:169.90,
    desc:"Creme de avelã, creme branco e pedaços de Kinder Bueno.", foto:"", cor:["#7A4B2E","#E9D3B0"]},
   {id:"ninho", nome:"Pavê de Ninho com morango", tag:"Pavê · Frutas", preco:149.90,
@@ -241,8 +245,19 @@ const SABORES = [
    desc:"Base de massa crocante, mousse de maracujá e chocolate.", foto:"fotos/maracuja.jpg", cor:["#D08A1E","#4A2C1E"]},
 ];
 
+// Cada opção de bombom vira um item próprio no pedido
+const ITENS = SABORES.flatMap(s => s.opcoes
+  ? s.opcoes.map((op, i) => ({...s, key: s.id + "-" + i, nome: `${s.nome} (${op})`, rotulo: op}))
+  : [{...s, key: s.id, rotulo: null}]);
 const qtd = {};
-SABORES.forEach(s => qtd[s.id] = 0);
+ITENS.forEach(i => qtd[i.key] = 0);
+const controle = (key, rotulo) => `
+        <div class="qtd${rotulo ? " opcao" : ""}">
+          ${rotulo ? `<span class="rot">${rotulo}</span>` : ""}
+          <button type="button" aria-label="Diminuir" data-id="${key}" data-d="-1">−</button>
+          <output id="q-${key}">0</output>
+          <button type="button" aria-label="Aumentar" data-id="${key}" data-d="1">+</button>
+        </div>`;
 const brl = v => v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 const fundo = s => s.foto ? `url('${s.foto}')` : `linear-gradient(135deg, ${s.cor[0]}, ${s.cor[1]})`;
 
@@ -255,13 +270,9 @@ grade.innerHTML = SABORES.map(s => `
       <span class="tag">${s.tag}</span>
       <h3>${s.nome}</h3>
       <p class="desc">${s.desc}</p>
-      <div class="linha">
+      <div class="linha${s.opcoes ? " multi" : ""}">
         <div class="preco">${brl(s.preco)}<small>1,5 kg · serve ~12</small></div>
-        <div class="qtd">
-          <button type="button" aria-label="Diminuir" data-id="${s.id}" data-d="-1">−</button>
-          <output id="q-${s.id}">0</output>
-          <button type="button" aria-label="Aumentar" data-id="${s.id}" data-d="1">+</button>
-        </div>
+        ${s.opcoes ? `<div class="opcoes">${ITENS.filter(i => i.id === s.id).map(i => controle(i.key, i.rotulo)).join("")}</div>` : controle(s.id)}
       </div>
     </div>
   </article>`).join("");
@@ -281,7 +292,7 @@ const cards = (comFoto.length ? comFoto : SABORES).map(s => `<figure class="foto
 trilho.innerHTML = cards + cards;
 
 function calcular(){
-  const itens = SABORES.filter(s => qtd[s.id] > 0).map(s => ({...s, q:qtd[s.id], sub:qtd[s.id]*s.preco}));
+  const itens = ITENS.filter(i => qtd[i.key] > 0).map(i => ({...i, q:qtd[i.key], sub:qtd[i.key]*i.preco}));
   const n = itens.reduce((a,i)=>a+i.q,0);
   const subtotal = itens.reduce((a,i)=>a+i.sub,0);
   const desconto = n >= 2 ? DESCONTO : 0;
@@ -291,9 +302,10 @@ function calcular(){
 
 function atualizar(){
   const c = calcular();
+  ITENS.forEach(i => { document.getElementById("q-"+i.key).textContent = qtd[i.key]; });
   SABORES.forEach(s => {
-    document.getElementById("q-"+s.id).textContent = qtd[s.id];
-    document.getElementById("item-"+s.id).classList.toggle("ativo", qtd[s.id] > 0);
+    const ativo = ITENS.some(i => i.id === s.id && qtd[i.key] > 0);
+    document.getElementById("item-"+s.id).classList.toggle("ativo", ativo);
   });
   const r = document.getElementById("resumo");
   if(!c.n){
