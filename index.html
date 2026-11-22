@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doces na Travessa – Marcia Bizi | Sobremesas de fim de ano</title>
+<meta name="description" content="Pavês e tortas na travessa de 1,5 kg para as suas festas de fim de ano. Serve cerca de 12 pessoas. Entrega combinada pelo WhatsApp.">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --creme:#FBF6EE; --creme2:#F3E9DA; --choco:#3B2418; --choco2:#6B4A3A;
+    --vermelho:#A8322D; --verde:#2F5D46; --dourado:#C9A15B; --branco:#fff;
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',system-ui,sans-serif;background:var(--creme);color:var(--choco);line-height:1.55;padding-bottom:96px}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:700;line-height:1.15}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+  /* Topo */
+  header{padding:18px 0;border-bottom:1px solid var(--creme2)}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .logo{display:flex;align-items:center;gap:10px}
+  .ico{width:42px;height:42px;flex:0 0 auto}
+  .marca{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:700}
+  .marca span{display:block;font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--choco2)}
+  .btn{display:inline-block;background:var(--vermelho);color:var(--branco);text-decoration:none;font-weight:700;padding:12px 22px;border-radius:999px;border:0;cursor:pointer;font-size:1rem;font-family:inherit}
+  .btn:hover{filter:brightness(1.08)}
+  .btn.zap{background:var(--verde);display:inline-flex;align-items:center;gap:8px;padding:10px 18px}
+  .btn{white-space:nowrap}
+  .marca{white-space:nowrap}
+  @media (max-width:480px){.marca{font-size:1.05rem}.ico{width:34px;height:34px}.btn.zap{padding:9px 14px;font-size:.9rem}}
+  .btn.ghost{background:transparent;color:var(--choco);border:1.5px solid var(--choco)}
+
+  /* Hero */
+  .hero{position:relative;text-align:center;color:var(--creme);background:linear-gradient(rgba(30,18,12,.62),rgba(30,18,12,.72)),url("https://images.unsplash.com/photo-1671636370499-9b076d6c1b75?auto=format&fit=crop&w=1800&q=70") center/cover;padding:80px 20px 64px;margin-bottom:40px}
+  .selo{display:inline-block;background:var(--verde);color:var(--creme);font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin-bottom:18px}
+  .hero h1{font-size:clamp(2.2rem,6vw,3.8rem);max-width:760px;margin:0 auto 16px}
+  .hero p{font-size:1.15rem;color:#F3E9DA;max-width:560px;margin:0 auto 28px}
+  .fatos{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:30px}
+  .fato{background:rgba(251,246,238,.95);color:var(--choco);border:0;border-radius:999px;padding:8px 16px;font-size:.92rem;font-weight:500}
+  .fato b{color:var(--vermelho)}
+
+  /* Galeria automática */
+  .galeria{overflow:hidden;padding:10px 0 50px;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+  .trilho{display:flex;gap:16px;width:max-content;animation:rolar 45s linear infinite}
+  .galeria:hover .trilho{animation-play-state:paused}
+  @keyframes rolar{to{transform:translateX(-50%)}}
+  .foto{width:260px;height:320px;border-radius:var(--radius);flex:0 0 auto;position:relative;overflow:hidden;background-size:cover;background-position:center}
+  .foto figcaption{position:absolute;left:12px;bottom:12px;background:rgba(251,246,238,.92);padding:6px 12px;border-radius:999px;font-size:.85rem;font-weight:700}
+  @media (prefers-reduced-motion:reduce){.trilho{animation:none}}
+
+  /* Seções */
+  section{padding:56px 0}
+  .titulo{text-align:center;margin-bottom:34px}
+  .titulo h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:8px}
+  .titulo p{color:var(--choco2)}
+
+  /* Cardápio */
+  .grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+  .item{background:var(--branco);border-radius:var(--radius);overflow:hidden;border:1px solid var(--creme2);display:flex;flex-direction:column}
+  .item .img{height:190px;background-size:cover;background-position:center}
+  .item .corpo{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .tag{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--verde)}
+  .item h3{font-size:1.3rem}
+  .item .desc{color:var(--choco2);font-size:.95rem;flex:1}
+  .linha{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+  .preco{font-size:1.3rem;font-weight:700}
+  .preco small{display:block;font-size:.78rem;font-weight:500;color:var(--choco2)}
+  .qtd{display:flex;align-items:center;gap:4px;background:var(--creme);border-radius:999px;padding:4px}
+  .qtd button{width:36px;height:36px;border-radius:50%;border:0;background:var(--branco);color:var(--choco);font-size:1.25rem;font-weight:700;cursor:pointer;box-shadow:0 1px 2px rgba(59,36,24,.15)}
+  .qtd button:hover{background:var(--choco);color:var(--creme)}
+  .qtd output{min-width:28px;text-align:center;font-weight:700;font-size:1.05rem}
+  .item.ativo{border-color:var(--vermelho);box-shadow:0 0 0 2px var(--vermelho) inset}
+  .oferta{margin-top:26px;text-align:center;background:var(--choco);color:var(--creme);border-radius:var(--radius);padding:18px;font-size:1.05rem}
+  .oferta b{color:var(--dourado)}
+
+  /* Pedido */
+  .pedido{background:var(--branco);border-radius:var(--radius);border:1px solid var(--creme2);padding:28px;max-width:640px;margin:0 auto}
+  .campo{margin-bottom:16px}
+  .campo label{display:block;font-weight:700;margin-bottom:6px;font-size:.95rem}
+  .campo input,.campo textarea{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--creme2);font:inherit;background:var(--creme);color:var(--choco)}
+  .campo input:focus,.campo textarea:focus{outline:none;border-color:var(--choco)}
+  .datas{display:flex;gap:10px}
+  .datas label{flex:1;cursor:pointer}
+  .datas input{display:none}
+  .datas span{display:block;text-align:center;padding:12px;border-radius:12px;border:1.5px solid var(--creme2);background:var(--creme);font-weight:700}
+  .datas input:checked + span{background:var(--choco);color:var(--creme);border-color:var(--choco)}
+  .resumo{border-top:1px dashed var(--creme2);margin-top:8px;padding-top:16px}
+  .resumo .l{display:flex;justify-content:space-between;padding:3px 0;font-size:.98rem}
+  .resumo .l.desc{color:var(--verde);font-weight:700}
+  .resumo .l.total{font-size:1.25rem;font-weight:700;border-top:1px solid var(--creme2);margin-top:8px;padding-top:10px}
+  .vazio{color:var(--choco2);font-style:italic}
+  .aviso{font-size:.85rem;color:var(--choco2);margin-top:12px}
+  .erro{color:var(--vermelho);font-weight:700;font-size:.92rem;margin-top:10px;display:none}
+
+  /* Passos */
+  .passos{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;counter-reset:p}
+  .passo{background:var(--creme2);border-radius:var(--radius);padding:22px}
+  .passo::before{counter-increment:p;content:counter(p);display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--vermelho);color:var(--branco);font-weight:700;margin-bottom:10px}
+  .passo h3{font-size:1.1rem;margin-bottom:4px}
+  .passo p{font-size:.93rem;color:var(--choco2)}
+
+  /* FAQ */
+  details{background:var(--branco);border:1px solid var(--creme2);border-radius:14px;padding:16px 20px;margin-bottom:10px;max-width:760px;margin-left:auto;margin-right:auto}
+  summary{font-weight:700;cursor:pointer}
+  details p{margin-top:8px;color:var(--choco2)}
+
+  footer{text-align:center;padding:36px 20px;color:var(--choco2);font-size:.9rem;border-top:1px solid var(--creme2)}
+
+  /* Barra fixa */
+  .barra{position:fixed;left:0;right:0;bottom:0;background:var(--choco);color:var(--creme);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:10;transform:translateY(110%);transition:transform .25s}
+  .barra.on{transform:none}
+  .barra .info{font-size:.95rem}
+  .barra .info b{font-size:1.15rem;display:block}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 22h36l-3 16a4 4 0 0 1-4 3H13a4 4 0 0 1-4-3z" fill="#C9A15B"/><rect x="9" y="25" width="30" height="4" fill="#F6E7DC"/><rect x="9.6" y="30" width="28.8" height="4" fill="#6B4A3A"/><path d="M8 22c2-5 7-8 16-8s14 3 16 8z" fill="#3B2418"/><circle cx="17" cy="16" r="3" fill="#A8322D"/><circle cx="27" cy="14.5" r="3" fill="#A8322D"/><path d="M27 11.5c1-2 3-3 5-3" stroke="#2F5D46" stroke-width="2" fill="none" stroke-linecap="round"/></svg><div class="marca">Doces na Travessa<span>Marcia Bizi</span></div></div>
+    <a class="btn zap" href="https://wa.me/5519974039899?text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20os%20doces%20na%20travessa." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.6-.3z"/></svg>Tirar dúvidas</a>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="selo">Encomendas de fim de ano abertas</div>
+    <h1>A sobremesa da sua ceia, resolvida.</h1>
+    <p>Pavês e tortas na travessa, feitos à mão e prontos para ir direto à mesa.</p>
+    <a class="btn" href="#cardapio">Montar meu pedido</a>
+    <div class="fatos">
+      <div class="fato">Travessa de <b>1,5 kg</b></div>
+      <div class="fato">Serve cerca de <b>12 pessoas</b></div>
+      <div class="fato">Feito <b>à mão</b></div>
+      <div class="fato"><b>Produção limitada</b>: garanta a sua</div>
+    </div>
+  </div>
+
+  <div class="galeria" aria-label="Galeria de fotos">
+    <div class="trilho" id="trilho"></div>
+  </div>
+
+  <section id="cardapio">
+    <div class="wrap">
+      <div class="titulo">
+        <h2>Cardápio</h2>
+        <p>Escolha os sabores e a quantidade. Seu pedido vai numa mensagem só.</p>
+      </div>
+      <div class="grade" id="grade"></div>
+      <div class="oferta">Levando <b>2 travessas ou mais</b>, você ganha <b>R$ 20 de desconto</b> no pedido.</div>
+    </div>
+  </section>
+
+  <section id="pedido" style="padding-top:0">
+    <div class="wrap">
+      <div class="titulo">
+        <h2>Finalize seu pedido</h2>
+        <p>Envie pelo WhatsApp e combinamos a data e a entrega por lá.</p>
+      </div>
+      <form class="pedido" id="form" novalidate>
+        <div class="campo">
+          <label for="nome">Seu nome</label>
+          <input id="nome" autocomplete="name" placeholder="Como podemos te chamar?">
+        </div>
+        <div class="campo">
+          <label for="obs">Observações (opcional)</label>
+          <textarea id="obs" rows="2" placeholder="Ex.: dia que você gostaria de receber"></textarea>
+        </div>
+        <div class="resumo" id="resumo"></div>
+        <p class="erro" id="erro"></p>
+        <button class="btn" type="submit" style="width:100%;margin-top:16px">Enviar pedido pelo WhatsApp</button>
+        <p class="aviso">Para confirmar, pedimos um sinal de 50% via Pix. O restante é pago na entrega.</p>
+      </form>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="titulo"><h2>Como funciona</h2></div>
+      <div class="passos">
+        <div class="passo"><h3>Escolha</h3><p>Monte seu pedido com os sabores e as quantidades.</p></div>
+        <div class="passo"><h3>Envie</h3><p>O pedido chega pronto no nosso WhatsApp.</p></div>
+        <div class="passo"><h3>Confirme</h3><p>Sinal de 50% via Pix garante a sua travessa.</p></div>
+        <div class="passo"><h3>Receba</h3><p>Combinamos a data e eu levo até você.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="titulo"><h2>Dúvidas frequentes</h2></div>
+      <details><summary>Quanto rende cada travessa?</summary><p>Cada travessa tem cerca de 1,5 kg e serve aproximadamente 12 pessoas.</p></details>
+      <details><summary>Como funciona a entrega?</summary><p>Eu mesma levo pra você! Só combinarmos a data ideal via WhatsApp no momento do pedido.</p></details>
+      <details><summary>Como faço o pagamento?</summary><p>Sinal de 50% via Pix para confirmar a encomenda e o restante na entrega.</p></details>
+      <details><summary>Como conservar?</summary><p>Mantenha na geladeira e consuma em até 3 dias.</p></details>
+      <details><summary>E se eu precisar cancelar?</summary><p>Em cancelamentos perto da data combinada, o sinal não é devolvido, porque os ingredientes já foram comprados.</p></details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <b>Doces na Travessa – Marcia Bizi</b><br>
+  Paulínia/SP · <a href="https://wa.me/5519974039899">WhatsApp (19) 97403-9899</a>
+<br><small>Foto do banner: Dwi Agus Prasetiyo / Unsplash</small>
+</footer>
+
+<div class="barra" id="barra">
+  <div class="info"><span id="barraQtd"></span><b id="barraTotal"></b></div>
+  <a class="btn" href="#pedido">Finalizar pedido</a>
+</div>
+
+<script>
+const WHATS = "5519974039899";
+const TAXA = 10;
+const DESCONTO = 20;
+
+// Para trocar as fotos: preencha "foto" com o caminho da imagem (ex.: "fotos/limao.jpg").
+const SABORES = [
+  {id:"sonho", nome:"Pavê de Sonho de Valsa", tag:"Pavê · Chocolates", preco:169.90,
+   desc:"Creme de baunilha, ganache e bombons picados por cima.", foto:"", cor:["#5B3A29","#C9A15B"]},
+  {id:"kinder", nome:"Pavê de Kinder Bueno", tag:"Pavê · Chocolates", preco:169.90,
+   desc:"Creme de avelã, creme branco e pedaços de Kinder Bueno.", foto:"", cor:["#7A4B2E","#E9D3B0"]},
+  {id:"ninho", nome:"Pavê de Ninho com morango", tag:"Pavê · Frutas", preco:149.90,
+   desc:"Creme de leite Ninho e morangos frescos.", foto:"", cor:["#A8322D","#F6E7DC"]},
+  {id:"uva", nome:"Pavê Bombom de uva", tag:"Pavê · Frutas", preco:149.90,
+   desc:"Creme branco, uvas inteiras e ganache.", foto:"", cor:["#4E3A5A","#D9C7A8"]},
+  {id:"limao", nome:"Torta de limão com ganache", tag:"Torta · Frutas", preco:149.90,
+   desc:"Base de massa crocante, creme de limão e ganache.", foto:"", cor:["#7E8F3A","#F3EBC8"]},
+  {id:"maracuja", nome:"Torta de maracujá com chocolate", tag:"Torta · Frutas", preco:149.90,
+   desc:"Base de massa crocante, mousse de maracujá e chocolate.", foto:"", cor:["#D08A1E","#4A2C1E"]},
+];
+
+const qtd = {};
+SABORES.forEach(s => qtd[s.id] = 0);
+const brl = v => v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+const fundo = s => s.foto ? `url('${s.foto}')` : `linear-gradient(135deg, ${s.cor[0]}, ${s.cor[1]})`;
+
+// Cardápio
+const grade = document.getElementById("grade");
+grade.innerHTML = SABORES.map(s => `
+  <article class="item" id="item-${s.id}">
+    <div class="img" style="background-image:${fundo(s)}" role="img" aria-label="${s.nome}"></div>
+    <div class="corpo">
+      <span class="tag">${s.tag}</span>
+      <h3>${s.nome}</h3>
+      <p class="desc">${s.desc}</p>
+      <div class="linha">
+        <div class="preco">${brl(s.preco)}<small>1,5 kg · serve ~12</small></div>
+        <div class="qtd">
+          <button type="button" aria-label="Diminuir" data-id="${s.id}" data-d="-1">−</button>
+          <output id="q-${s.id}">0</output>
+          <button type="button" aria-label="Aumentar" data-id="${s.id}" data-d="1">+</button>
+        </div>
+      </div>
+    </div>
+  </article>`).join("");
+
+grade.addEventListener("click", e => {
+  const b = e.target.closest("button[data-id]");
+  if(!b) return;
+  const id = b.dataset.id;
+  qtd[id] = Math.max(0, Math.min(10, qtd[id] + Number(b.dataset.d)));
+  atualizar();
+});
+
+// Galeria (repetida para rolar sem fim)
+const trilho = document.getElementById("trilho");
+const cards = SABORES.map(s => `<figure class="foto" style="background-image:${fundo(s)}"><figcaption>${s.nome}</figcaption></figure>`).join("");
+trilho.innerHTML = cards + cards;
+
+function calcular(){
+  const itens = SABORES.filter(s => qtd[s.id] > 0).map(s => ({...s, q:qtd[s.id], sub:qtd[s.id]*s.preco}));
+  const n = itens.reduce((a,i)=>a+i.q,0);
+  const subtotal = itens.reduce((a,i)=>a+i.sub,0);
+  const desconto = n >= 2 ? DESCONTO : 0;
+  const total = n ? subtotal - desconto + TAXA : 0;
+  return {itens,n,subtotal,desconto,total};
+}
+
+function atualizar(){
+  const c = calcular();
+  SABORES.forEach(s => {
+    document.getElementById("q-"+s.id).textContent = qtd[s.id];
+    document.getElementById("item-"+s.id).classList.toggle("ativo", qtd[s.id] > 0);
+  });
+  const r = document.getElementById("resumo");
+  if(!c.n){
+    r.innerHTML = `<p class="vazio">Nenhum sabor escolhido ainda. Use os botões + no cardápio.</p>`;
+  } else {
+    r.innerHTML = c.itens.map(i => `<div class="l"><span>${i.q}x ${i.nome}</span><span>${brl(i.sub)}</span></div>`).join("")
+      + (c.desconto ? `<div class="l desc"><span>Desconto (2 ou mais travessas)</span><span>− ${brl(c.desconto)}</span></div>` : "")
+      + `<div class="l"><span>Entrega</span><span>${brl(TAXA)}</span></div>`
+      + `<div class="l total"><span>Total</span><span>${brl(c.total)}</span></div>`;
+  }
+  const barra = document.getElementById("barra");
+  barra.classList.toggle("on", c.n > 0);
+  document.getElementById("barraQtd").textContent = c.n + (c.n === 1 ? " travessa" : " travessas");
+  document.getElementById("barraTotal").textContent = brl(c.total);
+}
+
+document.getElementById("form").addEventListener("submit", e => {
+  e.preventDefault();
+  const c = calcular();
+  const nome = document.getElementById("nome").value.trim();
+  const obs = document.getElementById("obs").value.trim();
+  const erro = document.getElementById("erro");
+  const falta = [];
+  if(!c.n) falta.push("escolha pelo menos um sabor");
+  if(!nome) falta.push("seu nome");
+  if(falta.length){ erro.textContent = "Falta: " + falta.join(", ") + "."; erro.style.display = "block"; return; }
+  erro.style.display = "none";
+
+  let msg = `Olá! Quero fazer uma encomenda:\n\n`;
+  msg += c.itens.map(i => `• ${i.q}x ${i.nome} (${brl(i.sub)})`).join("\n");
+  if(c.desconto) msg += `\n\nDesconto (2 ou mais travessas): − ${brl(c.desconto)}`;
+  msg += `\nEntrega: ${brl(TAXA)}`;
+  msg += `\n*Total: ${brl(c.total)}*`;
+  msg += `\n\nNome: ${nome}`;
+  if(obs) msg += `\nObservações: ${obs}`;
+  msg += `\n\nPodemos combinar a data e o endereço de entrega?`;
+  window.open(`https://wa.me/${WHATS}?text=${encodeURIComponent(msg)}`, "_blank");
+});
+
+atualizar();
+</script>
+</body>
+</html>
