@@ -105,6 +105,8 @@
   .resumo .l.total{font-size:1.25rem;font-weight:700;border-top:1px solid var(--creme2);margin-top:8px;padding-top:10px}
   .vazio{color:var(--choco2);font-style:italic}
   .aviso{font-size:.85rem;color:var(--choco2);margin-top:12px}
+  .prazos{background:var(--creme2);border-radius:14px;padding:14px 18px;margin:0 auto 18px;max-width:640px;font-size:.95rem;line-height:1.5}
+  .prazos b{color:var(--vermelho)}
   .erro{color:var(--vermelho);font-weight:700;font-size:.92rem;margin-top:10px;display:none}
 
   /* Passos */
@@ -148,6 +150,7 @@
       <div class="fato">Serve cerca de <b>12 pessoas</b></div>
       <div class="fato">Feito <b>à mão</b></div>
       <div class="fato"><b>Produção limitada</b>: garanta a sua</div>
+      <div class="fato">Entregas <b>23, 24 e 30/12</b></div>
     </div>
   </div>
 
@@ -172,6 +175,10 @@
         <h2>Finalize seu pedido</h2>
         <p>Envie pelo WhatsApp e combinamos a data e a entrega por lá.</p>
       </div>
+      <div class="prazos">
+        📅 Entregas de fim de ano nos dias <b>23, 24 e 30/12</b>.<br>
+        ⏳ Todo pedido tem prazo mínimo de <b>2 dias úteis</b> de produção.
+      </div>
       <form class="pedido" id="form" novalidate>
         <div class="campo">
           <label for="nome">Seu nome</label>
@@ -180,6 +187,13 @@
         <div class="campo">
           <label for="obs">Observações (opcional)</label>
           <textarea id="obs" rows="2" placeholder="Ex.: dia que você gostaria de receber"></textarea>
+        </div>
+        <div class="campo">
+          <label>A entrega é para (opcional)</label>
+          <div class="datas" id="ocasiao">
+            <label><input type="radio" name="ocasiao" value="Natal"><span>Natal</span></label>
+            <label><input type="radio" name="ocasiao" value="Ano Novo"><span>Ano Novo</span></label>
+          </div>
         </div>
         <div class="resumo" id="resumo"></div>
         <p class="erro" id="erro"></p>
@@ -205,7 +219,8 @@
     <div class="wrap">
       <div class="titulo"><h2>Dúvidas frequentes</h2></div>
       <details><summary>Quanto rende cada travessa?</summary><p>Cada travessa tem cerca de 1,5 kg e serve aproximadamente 12 pessoas.</p></details>
-      <details><summary>Como funciona a entrega?</summary><p>Eu mesma levo pra você! Só combinarmos a data ideal via WhatsApp no momento do pedido.</p></details>
+      <details><summary>Como funciona a entrega?</summary><p>Eu mesma levo pra você! As entregas de fim de ano são nos dias 23, 24 e 30/12, e combinamos a data ideal via WhatsApp no momento do pedido.</p></details>
+      <details><summary>Com quanto tempo de antecedência preciso pedir?</summary><p>Todo pedido tem prazo mínimo de 2 dias úteis de produção. Como a produção é limitada, quanto antes, melhor.</p></details>
       <details><summary>Como faço o pagamento?</summary><p>Sinal de 50% via Pix para confirmar a encomenda e o restante na entrega.</p></details>
       <details><summary>Como conservar?</summary><p>Mantenha na geladeira e consuma em até 3 dias.</p></details>
       <details><summary>E se eu precisar cancelar?</summary><p>Em cancelamentos perto da data combinada, o sinal não é devolvido, porque os ingredientes já foram comprados.</p></details>
@@ -236,11 +251,11 @@ const SABORES = [
   {id:"kinder", nome:"Pavê de Kinder Bueno", tag:"Pavê · Chocolates", preco:169.90,
    desc:"Creme de avelã, creme branco e pedaços de Kinder Bueno.", foto:"fotos/kinder.jpg", cor:["#7A4B2E","#E9D3B0"]},
   {id:"ninho", nome:"Pavê de Ninho com morango", tag:"Pavê · Frutas", preco:149.90,
-   desc:"Creme de leite Ninho e morangos frescos.", foto:"fotos/ninho-morango.jpg", cor:["#A8322D","#F6E7DC"]},
+   desc:"Creme de leite Ninho, morangos frescos e ganache de chocolate.", foto:"fotos/ninho-morango.jpg", cor:["#A8322D","#F6E7DC"]},
   {id:"uva", nome:"Pavê Bombom de uva", tag:"Pavê · Frutas", preco:149.90,
    desc:"Creme branco, uvas inteiras e ganache.", foto:"fotos/uva.jpg", cor:["#4E3A5A","#D9C7A8"]},
-  {id:"limao", nome:"Torta de limão com ganache", tag:"Torta · Frutas", preco:149.90,
-   desc:"Base de massa crocante, creme de limão e ganache.", foto:"fotos/limao.jpg", cor:["#7E8F3A","#F3EBC8"]},
+  {id:"limao", nome:"Torta de limão com mousse", tag:"Torta · Frutas", preco:149.90,
+   desc:"Base de massa crocante, creme de limão e mousse de limão.", foto:"fotos/limao.jpg", cor:["#7E8F3A","#F3EBC8"]},
   {id:"maracuja", nome:"Torta de maracujá com chocolate", tag:"Torta · Frutas", preco:149.90,
    desc:"Base de massa crocante, mousse de maracujá e chocolate.", foto:"fotos/maracuja.jpg", cor:["#D08A1E","#4A2C1E"]},
 ];
@@ -327,6 +342,7 @@ document.getElementById("form").addEventListener("submit", e => {
   const c = calcular();
   const nome = document.getElementById("nome").value.trim();
   const obs = document.getElementById("obs").value.trim();
+  const ocasiao = document.querySelector('input[name="ocasiao"]:checked')?.value;
   const erro = document.getElementById("erro");
   const falta = [];
   if(!c.n) falta.push("escolha pelo menos um sabor");
@@ -341,8 +357,18 @@ document.getElementById("form").addEventListener("submit", e => {
   msg += `\n*Total: ${brl(c.total)}*`;
   msg += `\n\nNome: ${nome}`;
   if(obs) msg += `\nObservações: ${obs}`;
+  if(ocasiao) msg += `\nEntrega para: ${ocasiao}`;
   msg += `\n\nPodemos combinar a data e o endereço de entrega?`;
   window.open(`https://wa.me/${WHATS}?text=${encodeURIComponent(msg)}`, "_blank");
+});
+
+// Permite desmarcar Natal/Ano Novo clicando de novo (campo opcional)
+let ocasiaoAnterior = null;
+document.querySelectorAll('input[name="ocasiao"]').forEach(r => {
+  r.addEventListener("click", () => {
+    if(ocasiaoAnterior === r){ r.checked = false; ocasiaoAnterior = null; }
+    else ocasiaoAnterior = r;
+  });
 });
 
 atualizar();
